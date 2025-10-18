@@ -15,6 +15,7 @@
           <th>Popularity</th>
           <th>Won Oscar</th>
           <th>Won Emmy</th>
+          <th>Actions</th>
         </tr>
       </thead>
     <tbody>
@@ -23,7 +24,8 @@
       <td>{{ contact.name }}</td>
       <td> {{ contact.popularity }}</td>
       <td><span v-if="contact.wonOscar">🏆</span></td>
-      <td><span v-if="contact.wonEmmy">🏆</span></td>  
+      <td><span v-if="contact.wonEmmy">🏆</span></td> 
+      <td><button @click="deleteContact(contact.id)">Delete</button></td> 
     </tr>
     </tbody>
     </table>
@@ -59,6 +61,10 @@ function SortByName() {
   contacts.value.sort((a, b) => a.name.localeCompare(b.name));
 }
 
+function deleteContact(id) {
+  contacts.value = contacts.value.filter(contact => contact.id !== id);
+}
+
 </script>
 
 <style>
@@ -70,6 +76,17 @@ td {
 button {
   display: block;
   margin: 20px auto
-  
+  }
+
+  tbody tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+button:hover {
+  opacity: 0.9;
+  transform: scale(1.05);
+  border-radius: 5px.
+}
+tr {
+  transition: all 0.3s ease-in-out;
 }
 </style>
